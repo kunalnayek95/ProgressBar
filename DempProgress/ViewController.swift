@@ -30,10 +30,8 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.solidProgress.constant = (self.mainProgressView.frame.size.width/100)*50
-        self.stripedProgress.constant = (self.mainProgressView.frame.size.width/100)*10
-        
-        
+        self.solidProgress.constant = (self.mainProgressView.frame.size.width/100)*30
+        self.stripedProgress.constant = (self.mainProgressView.frame.size.width/100)*40
     }
 
 
@@ -55,11 +53,16 @@ class Ruled: UIView {
         var p = -(W > H ? W : H) - T
         while p <= W {
             
-            c.move( to: CGPoint(x: p-T, y: -T) )
-            c.addLine( to: CGPoint(x: p+T+H, y: T+H) )
+            print("x: ",(p-T),"y: ",(-T))
+            print("x: ",(p+T+H),"y: ",(T+H),"\n")
+            c.move( to: CGPoint(x: (p-T), y: (-T)) )
+            c.addLine( to: CGPoint(x: (p+T+H), y: (T+H)) )
             c.strokePath()
             p += G + T + T
         }
+        //self.transform = CGAffineTransform(rotationAngle: CGFloat(-180 * Double.pi / 180))
+        self.layer.transform = CATransform3DMakeScale(1, -1, 1)
+        
     }
 }
 
